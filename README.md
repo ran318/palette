@@ -88,7 +88,7 @@ use Filament\Support\Colors\Color;
 
 ColorPicker::make('color')
     ->colors([
-        'indigo' => Color::Indigo
+        'indigo' => Color::Indigo,
         'badass' => Color::hex('#bada55'),
         'salmon' => '#fa8072',
         'bg-gradient-secondary' => 'bg-gradient-secondary'
@@ -115,7 +115,7 @@ use Filament\Support\Colors\Color;
 
 ColorPickerSelect::make('color')
     ->colors([
-        'indigo' => Color::Indigo
+        'indigo' => Color::Indigo,
         'badass' => Color::hex('#bada55'),
         'salmon' => '#fa8072',
         'bg-gradient-secondary' => 'bg-gradient-secondary'
