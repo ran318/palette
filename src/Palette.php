@@ -36,7 +36,7 @@ class Palette
 
     public function determineType(string $value): string
     {
-        if (preg_match('/(^#?[a-f0-9]{6})/', $value) === 1) {
+        if (preg_match('/^#?[a-fA-F0-9]{6}$/', $value) === 1) {
             return 'hex';
         } elseif (preg_match("/(\d{1,3},\s\d{1,3},\s\d{1,3})/", $value) === 1) {
             return 'rgb';
