@@ -51,9 +51,9 @@ class ColorPickerSelect extends Select
 
     public function getOptions(): array
     {
-        return collect($this->getColors())->mapWithKeys(function ($color) {
+        return collect($this->getColors())->sortBy('label')->mapWithKeys(function ($color) {
             return [$color['key'] => $this->getOptionView($color)];
-        })->sortKeys()->toArray();
+        })->toArray();
     }
 
     public function getOptionView(array $color): string | Htmlable
