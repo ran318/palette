@@ -8,6 +8,7 @@ use Closure;
 use Filament\Forms\Components\Select;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Blade;
+use Js;
 
 class ColorPickerSelect extends Select
 {
@@ -22,7 +23,13 @@ class ColorPickerSelect extends Select
     {
         parent::setUp();
 
+        $styles = Js::from(\Filament\Support\Facades\FilamentAsset::getStyleHref('palette-select-styles', 'awcodes/palette'));
+
         $this
+            ->extraAttributes([
+                'x-data' => '',
+                'x-load-css' => '[' . $styles . ']',
+            ])
             ->afterStateHydrated(function (ColorPickerSelect $component, string | array | null $state) {
                 if (! $state) {
                     return;
