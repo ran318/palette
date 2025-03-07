@@ -96,6 +96,9 @@ ColorPicker::make('color')
     ->shades([
         'badass' => 300
     ])
+    ->labels([
+        'bg-gradient-secondary' => 'Gradient Secondary'
+    ])
     ->size('sm') // optional 'xs', 'sm', 'md', 'lg', 'xl'
     ->withBlack(swap: '#111111')
     ->withWhite(swap: '#f5f5f5'),
@@ -122,6 +125,9 @@ ColorPickerSelect::make('color')
     ])
     ->shades([
         'badass' => 300
+    ])
+    ->labels([
+        'bg-gradient-secondary' => 'Gradient Secondary'
     ])
     ->withBlack(swap: '#111111')
     ->withWhite(swap: '#f5f5f5'),

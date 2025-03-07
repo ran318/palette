@@ -29,6 +29,9 @@ it('supports custom colors', function () {
         ])
         ->shades([
             'badass' => 200,
+        ])
+        ->labels([
+            'bg-gradient-secondary' => 'Background Gradient Secondary',
         ]);
 
     $colors = $field->getColors();
@@ -37,7 +40,8 @@ it('supports custom colors', function () {
         ->toHaveKeys(['badass', 'salmon', 'bg-gradient-secondary'])
         ->and($colors['badass']['property'])->toBe('--badass-200')
         ->and($colors['salmon']['property'])->toBe('--salmon')
-        ->and($colors['bg-gradient-secondary']['property'])->toBe('--bg-gradient-secondary');
+        ->and($colors['bg-gradient-secondary']['property'])->toBe('--bg-gradient-secondary')
+        ->and($colors['bg-gradient-secondary']['label'])->toBe('Background Gradient Secondary');
 });
 
 it('sets the right size', function () {
@@ -100,7 +104,7 @@ it('can save correct data', function () {
         ->assertSet('data.color_as_key', 'salmon');
 
     $this->assertDatabaseHas(Page::class, [
-        'color' => json_encode(Palette::buildColor('badass', Color::hex('#bada55'), [])),
+        'color' => json_encode(Palette::buildColor('badass', Color::hex('#bada55'), [], [])),
         'color_as_key' => 'salmon',
     ]);
 });
@@ -129,6 +133,6 @@ it('can update correct data', function () {
         ->assertSet('data.color_as_key', 'badass');
 
     expect($page->refresh())
-        ->color->toBe(Palette::buildColor('salmon', '#fa8072', []))
+        ->color->toBe(Palette::buildColor('salmon', '#fa8072', [], []))
         ->color_as_key->toBe('badass');
 });

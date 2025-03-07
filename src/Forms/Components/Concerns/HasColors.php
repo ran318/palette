@@ -14,6 +14,8 @@ trait HasColors
 
     protected array | Closure | null $shades = null;
 
+    protected array | Closure | null $labels = null;
+
     protected bool | Closure | null $hasWhite = null;
 
     protected bool | Closure | null $hasBlack = null;
@@ -35,6 +37,13 @@ trait HasColors
     public function shades(array | Closure $shades): static
     {
         $this->shades = $shades;
+
+        return $this;
+    }
+
+    public function labels(array | Closure $labels): static
+    {
+        $this->labels = $labels;
 
         return $this;
     }
@@ -67,7 +76,7 @@ trait HasColors
             $colors['black'] = $this->swapBlack ?? '#000000';
         }
 
-        return Palette::processColors($colors, $this->getShades());
+        return Palette::processColors($colors, $this->getShades(), $this->getLabels());
     }
 
     public function getShades(): array
@@ -75,6 +84,11 @@ trait HasColors
         return $this->evaluate($this->shades) ?? collect(FilamentColor::getColors())->mapWithKeys(function ($color, $key) {
             return [$key => 500];
         })->toArray();
+    }
+
+    public function getLabels(): array
+    {
+        return $this->evaluate($this->labels) ?? [];
     }
 
     public function hasWhite(): bool
