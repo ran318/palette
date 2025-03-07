@@ -6,14 +6,14 @@ use Illuminate\Support\Collection;
 
 class Palette
 {
-    public function processColors(array $colors, ?array $shades = []): array | Collection
+    public function processColors(array $colors, ?array $shades = [], ?array $labels = []): array | Collection
     {
-        return collect($colors)->mapWithKeys(function ($color, $key) use ($shades) {
-            return [$key => $this->buildColor($key, $color, $shades)];
+        return collect($colors)->mapWithKeys(function ($color, $key) use ($shades, $labels) {
+            return [$key => $this->buildColor($key, $color, $shades, $labels)];
         });
     }
 
-    public function buildColor(string $key, array | string $color, array $shades): array
+    public function buildColor(string $key, array | string $color, array $shades, array $labels): array
     {
         if (is_array($color)) {
             $value = isset($shades[$key]) ? $color[$shades[$key]] : $color[500];
@@ -23,12 +23,13 @@ class Palette
             $shade = null;
         }
 
+        $label = $labels[$key] ?? (string) str($key)->title()->replace('-', ' ');
         $type = $this->determineType($value);
 
         return [
             'key' => $key,
             'property' => '--' . $key . ($shade ? '-' . $shade : ''),
-            'label' => (string) str($key)->title()->replace('-', ' '),
+            'label' => $label,
             'type' => $type,
             'value' => $value,
         ];
