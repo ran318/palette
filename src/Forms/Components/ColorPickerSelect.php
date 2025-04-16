@@ -5,10 +5,12 @@ namespace Awcodes\Palette\Forms\Components;
 use Awcodes\Palette\Forms\Components\Concerns\CanStoreAsKey;
 use Awcodes\Palette\Forms\Components\Concerns\HasColors;
 use Closure;
+use Exception;
 use Filament\Forms\Components\Select;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Blade;
-use Js;
+use Illuminate\Support\Js;
+use JsonException;
 
 class ColorPickerSelect extends Select
 {
@@ -19,6 +21,10 @@ class ColorPickerSelect extends Select
 
     protected bool | Closure $isNative = false;
 
+    /**
+     * @throws JsonException
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         parent::setUp();
